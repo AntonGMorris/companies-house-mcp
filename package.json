@@ -7,12 +7,12 @@
   "author": "Anton Morris",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shadowborn-dev/companies-house-mcp.git"
+    "url": "https://github.com/AntonGMorris/companies-house-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/shadowborn-dev/companies-house-mcp/issues"
+    "url": "https://github.com/AntonGMorris/companies-house-mcp/issues"
   },
-  "homepage": "https://github.com/shadowborn-dev/companies-house-mcp#readme",
+  "homepage": "https://github.com/AntonGMorris/companies-house-mcp#readme",
   "keywords": [
     "mcp",
     "model-context-protocol",

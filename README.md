@@ -1,6 +1,6 @@
 # companies-house-mcp
 
-[![CI](https://github.com/shadowborn-dev/companies-house-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/shadowborn-dev/companies-house-mcp/actions/workflows/ci.yml)
+[![CI](https://github.com/AntonGMorris/companies-house-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/AntonGMorris/companies-house-mcp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org)
 [![MCP](https://img.shields.io/badge/protocol-MCP-8A2BE2.svg)](https://modelcontextprotocol.io)
@@ -64,7 +64,7 @@ claude mcp add companies-house npx -y companies-house-mcp -- --env CH_API_KEY=yo
 ### Local dev
 
 ```bash
-git clone https://github.com/shadowborn-dev/companies-house-mcp
+git clone https://github.com/AntonGMorris/companies-house-mcp
 cd companies-house-mcp
 npm install
 cp .env.example .env    # add your API key
