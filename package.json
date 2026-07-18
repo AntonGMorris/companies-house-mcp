@@ -1,0 +1,59 @@
+{
+  "name": "companies-house-mcp",
+  "version": "0.1.0",
+  "description": "Production-grade Model Context Protocol server for the UK Companies House API. Auth, rate limits, caching, tests.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Anton Morris",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shadowborn-dev/companies-house-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shadowborn-dev/companies-house-mcp/issues"
+  },
+  "homepage": "https://github.com/shadowborn-dev/companies-house-mcp#readme",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "companies-house",
+    "uk",
+    "kyc",
+    "claude"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "companies-house-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --ext .ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "tsx": "^4.17.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
