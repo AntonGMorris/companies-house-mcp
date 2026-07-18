@@ -1,5 +1,10 @@
 # companies-house-mcp
 
+[![CI](https://github.com/shadowborn-dev/companies-house-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/shadowborn-dev/companies-house-mcp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org)
+[![MCP](https://img.shields.io/badge/protocol-MCP-8A2BE2.svg)](https://modelcontextprotocol.io)
+
 **Production-grade [Model Context Protocol](https://modelcontextprotocol.io) server for the UK [Companies House](https://developer.company-information.service.gov.uk/) API.**
 
 Point any MCP-aware assistant (Claude Desktop, Claude Code, Cursor, custom agents) at UK company data. Auth, rate limiting, in-memory caching, structured errors, and a real test suite included — not a tutorial demo.
@@ -73,6 +78,17 @@ npm start
 docker build -t companies-house-mcp .
 docker run --rm -i -e CH_API_KEY=your-key-here companies-house-mcp
 ```
+
+## Try it in the browser (MCP Inspector)
+
+The fastest way to poke at the tools without wiring the server into Claude Desktop is the official [MCP Inspector](https://github.com/modelcontextprotocol/inspector) — a web UI that connects to any MCP server and lets you call its tools with a form.
+
+```bash
+# put your key in .env first (or export CH_API_KEY=... in the shell)
+npm run inspect
+```
+
+That builds the server, launches the Inspector in a local browser tab, and connects to the built server over stdio. You'll see the five tools listed on the left; click one, fill in the form on the right (`company_number: "12345678"` for `get_company_profile`, or `query: "morris"` for `search_companies`), hit **Run tool**, and the raw JSON response comes back below. Handy for verifying a tool works before you plug the server into Claude.
 
 ## Production concerns handled
 
