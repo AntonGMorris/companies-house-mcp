@@ -1,7 +1,7 @@
 {
   "name": "companies-house-mcp",
-  "version": "0.1.0",
-  "description": "Production-grade Model Context Protocol server for the UK Companies House API. Auth, rate limits, caching, tests.",
+  "version": "0.2.0",
+  "description": "Production-grade Model Context Protocol server for the UK Companies House API. Auth, rate limits, caching, tests. Also exposes the underlying HTTP client for direct use.",
   "type": "module",
   "license": "MIT",
   "author": "Anton Morris",
@@ -28,6 +28,16 @@
     "companies-house-mcp": "./dist/index.js"
   },
   "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/lib.js"
+    }
+  },
   "files": [
     "dist",
     "README.md",
@@ -41,6 +51,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "inspect": "npm run build && npx @modelcontextprotocol/inspector node dist/index.js",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

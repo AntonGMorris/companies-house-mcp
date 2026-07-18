@@ -90,6 +90,21 @@ npm run inspect
 
 That builds the server, launches the Inspector in a local browser tab, and connects to the built server over stdio. You'll see the five tools listed on the left; click one, fill in the form on the right (`company_number: "12345678"` for `get_company_profile`, or `query: "morris"` for `search_companies`), hit **Run tool**, and the raw JSON response comes back below. Handy for verifying a tool works before you plug the server into Claude.
 
+## Use the client directly (without the MCP server)
+
+The HTTP client that backs the MCP tools is also exported as a plain library, so other Node projects can reuse the auth + rate-limiting + caching without running the server:
+
+```ts
+import { CompaniesHouseClient } from "companies-house-mcp/client";
+
+const client = new CompaniesHouseClient({ apiKey: process.env.CH_API_KEY! });
+
+const profile = await client.getCompanyProfile("00000006");
+const officers = await client.listOfficers("03017060");
+```
+
+Structured error types (`NotFoundError`, `UnauthorizedError`, `RateLimitedError`, `UpstreamError`) are exported alongside the client so you can `catch` typed. This is exactly how [`lead-qual-agent`](https://github.com/AntonGMorris/lead-qual-agent) consumes UK filings for enrichment — no duplicated auth code.
+
 ## Production concerns handled
 
 **Auth.** Companies House uses HTTP Basic with the API key as the username. This server wraps that transparently — you only ever set `CH_API_KEY`.
@@ -124,6 +139,20 @@ That builds the server, launches the Inspector in a local browser tab, and conne
 - The Companies House API returns data as filed — occasionally with typos, inconsistent capitalisation, or delays of days between filing and appearing. This server does not clean or reconcile any of that.
 - Rate-limit budgeting is per-API-key. If you share a key across multiple instances of this server, they will not coordinate — colocate to one instance or supply a distributed limiter in v0.5.
 - Not affiliated with or endorsed by Companies House.
+
+## Part of the AI-governance stack
+
+This repo is one of five that ship together as a coherent AI-governance stack. Each is standalone; they compose.
+
+| Repo | What it is |
+|---|---|
+| [`companies-house-mcp`](https://github.com/AntonGMorris/companies-house-mcp) | **You are here.** Production-grade MCP server for the UK Companies House API. |
+| [`prompt-injection-lab`](https://github.com/AntonGMorris/prompt-injection-lab) | Automated red-team suite. Fires known injection payloads at any AI endpoint. |
+| [`hitl-review`](https://github.com/AntonGMorris/hitl-review) | Drop-in human-in-the-loop review queue. |
+| [`audit-log-llm`](https://github.com/AntonGMorris/audit-log-llm) | GDPR-friendly structured audit logging for LLM calls. |
+| [`lead-qual-agent`](https://github.com/AntonGMorris/lead-qual-agent) | Example agent that composes all of the above. |
+
+Built and maintained by [Anton Morris](https://antonmorris.co.uk).
 
 ## License
 
