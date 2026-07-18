@@ -44,7 +44,7 @@ Edit your `claude_desktop_config.json`:
   "mcpServers": {
     "companies-house": {
       "command": "npx",
-      "args": ["-y", "@antonmorris/companies-house-mcp"],
+      "args": ["-y", "github:AntonGMorris/companies-house-mcp"],
       "env": {
         "CH_API_KEY": "your-key-here"
       }
@@ -58,7 +58,7 @@ Restart Claude Desktop. Ask it: *"Look up MORRIS AI LTD on Companies House and t
 ### Claude Code
 
 ```bash
-claude mcp add companies-house npx -y @antonmorris/companies-house-mcp -- --env CH_API_KEY=your-key-here
+claude mcp add companies-house npx -y github:AntonGMorris/companies-house-mcp -- --env CH_API_KEY=your-key-here
 ```
 
 ### Local dev
