@@ -90,6 +90,33 @@ npm run inspect
 
 That builds the server, launches the Inspector in a local browser tab, and connects to the built server over stdio. You'll see the five tools listed on the left; click one, fill in the form on the right (`company_number: "12345678"` for `get_company_profile`, or `query: "morris"` for `search_companies`), hit **Run tool**, and the raw JSON response comes back below. Handy for verifying a tool works before you plug the server into Claude.
 
+## Example — what the model sees
+
+Ask a Claude Desktop connected to this server: *"look up Greggs plc"*. The tool-call chain and responses look like this:
+
+```json
+// call: search_companies({ query: "greggs" })
+{
+  "items": [
+    { "company_number": "00502851", "title": "GREGGS PLC", "company_status": "active", "date_of_creation": "1951-05-25" },
+    { "company_number": "12345678", "title": "GREGGS OF FAKENHAM LIMITED", "company_status": "active" }
+  ]
+}
+
+// call: get_company_profile({ company_number: "00502851" })
+{
+  "company_name": "GREGGS PLC",
+  "company_number": "00502851",
+  "company_status": "active",
+  "type": "plc",
+  "date_of_creation": "1951-05-25",
+  "registered_office_address": { "address_line_1": "Fernwood House", "locality": "Newcastle Upon Tyne", "postal_code": "NE1 4TZ" },
+  "sic_codes": ["10710"]
+}
+```
+
+Because responses are structured (not scraped HTML), the model can chain calls confidently — `search_companies` → pick the right hit → `list_officers` — without any glue code.
+
 ## Use the client directly (without the MCP server)
 
 The HTTP client that backs the MCP tools is also exported as a plain library, so other Node projects can reuse the auth + rate-limiting + caching without running the server:
