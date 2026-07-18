@@ -44,7 +44,7 @@ Edit your `claude_desktop_config.json`:
   "mcpServers": {
     "companies-house": {
       "command": "npx",
-      "args": ["-y", "companies-house-mcp"],
+      "args": ["-y", "@antongmorris/companies-house-mcp"],
       "env": {
         "CH_API_KEY": "your-key-here"
       }
@@ -58,7 +58,7 @@ Restart Claude Desktop. Ask it: *"Look up MORRIS AI LTD on Companies House and t
 ### Claude Code
 
 ```bash
-claude mcp add companies-house npx -y companies-house-mcp -- --env CH_API_KEY=your-key-here
+claude mcp add companies-house npx -y @antongmorris/companies-house-mcp -- --env CH_API_KEY=your-key-here
 ```
 
 ### Local dev
@@ -122,7 +122,7 @@ Because responses are structured (not scraped HTML), the model can chain calls c
 The HTTP client that backs the MCP tools is also exported as a plain library, so other Node projects can reuse the auth + rate-limiting + caching without running the server:
 
 ```ts
-import { CompaniesHouseClient } from "companies-house-mcp/client";
+import { CompaniesHouseClient } from "@antongmorris/companies-house-mcp/client";
 
 const client = new CompaniesHouseClient({ apiKey: process.env.CH_API_KEY! });
 

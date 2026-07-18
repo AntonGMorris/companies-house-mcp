@@ -1,5 +1,5 @@
 {
-  "name": "companies-house-mcp",
+  "name": "@antongmorris/companies-house-mcp",
   "version": "0.2.0",
   "description": "Production-grade Model Context Protocol server for the UK Companies House API. Auth, rate limits, caching, tests. Also exposes the underlying HTTP client for direct use.",
   "type": "module",
